@@ -1,14 +1,14 @@
 'use strict';
 
+var _ = require('../../myLodash.js');
 function double_to_one(collection) {
-    var _ = require('../../myLodash.js');
     var result = [];
 
-    _.each(collection, function(array){
+    _(collection).each(function(array){
         if(array.length === undefined){
             result.push(array);
         }else{
-            _.each(array, function(n){
+            _(array).each(function(n){
                 result.push(n);
             });
         }
