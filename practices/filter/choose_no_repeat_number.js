@@ -1,11 +1,11 @@
 'use strict';
 
+var _ = require('../../myLodash.js');
 function choose_no_repeat_number(collection) {
-    var _ = require('../../myLodash.js');
     var array = [];
 
-    _.each(collection, function(n){
-        if(!_.exist(array, n)){
+    _(collection).each(function(n){
+        if(!_(array).exist(n)){
             array.push(n);
         }
     });
