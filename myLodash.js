@@ -95,11 +95,11 @@ myLodash.prototype.range = function(number){
     return this;
 }
 
-myLodash.prototype.intersection = function(ObjectCollection){
+myLodash.prototype.intersection = function(collection_a){
     var result = [];
 
     this.each(function(n1){
-        ObjectCollection.each(function(n2){
+        myLodash(collection_a).each(function(n2){
             if(n1 === n2) {
                 result.push(n1);
             }
@@ -108,6 +108,25 @@ myLodash.prototype.intersection = function(ObjectCollection){
 
     this.collection = result;
     return this;
+}
+
+myLodash.prototype.getChar = function(number){
+    if(number>26) {
+        var carry = parseInt(number/26);
+        if(number%26 === 0) {
+            return String.fromCharCode(carry-1+96)+String.fromCharCode(26+96);
+        }
+        else {
+            return String.fromCharCode(carry+96)+String.fromCharCode(number%26+96);
+        }
+    }else {
+        if(number%26 === 0) {
+            return String.fromCharCode(26+96);
+        }
+        else {
+            return String.fromCharCode(number%26+96);
+        }
+    }
 }
 
 myLodash.prototype.value = function(){

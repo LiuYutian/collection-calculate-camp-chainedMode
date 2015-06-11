@@ -22,13 +22,8 @@ function getChar(number) {
 }
 
 function get_letter_interval_2(number_a, number_b) {
-    var array = _.range(number_a, number_b);
-    var result = [];
-
-    _.each(array, function(n){
-        result.push(getChar(n));
-    });
-
-    return result;
+    return _(number_a).range(number_b).map(function(n){
+        return _().getChar(n);
+    }).value();
 }
 module.exports = get_letter_interval_2;
