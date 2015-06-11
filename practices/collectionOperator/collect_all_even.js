@@ -7,7 +7,4 @@ function collect_all_even(collection) {
         return n % 2 === 0;
     }).value();
 }
-
-var array = [];
-
 module.exports = collect_all_even;
