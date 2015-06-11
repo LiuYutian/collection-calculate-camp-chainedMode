@@ -111,22 +111,56 @@ myLodash.prototype.intersection = function(collection_a){
 }
 
 myLodash.prototype.getChar = function(number){
-    if(number>26) {
-        var carry = parseInt(number/26);
-        if(number%26 === 0) {
-            return String.fromCharCode(carry-1+96)+String.fromCharCode(26+96);
+    var NUMBER_TWENTY_SIX = 26;
+    var NUMBER_NINETY_SIX = 96;
+
+    if(number>NUMBER_TWENTY_SIX) {
+        var carry = parseInt(number/NUMBER_TWENTY_SIX);
+        if(number%NUMBER_TWENTY_SIX === 0) {
+            return String.fromCharCode(carry-1+NUMBER_NINETY_SIX)+String.fromCharCode(NUMBER_TWENTY_SIX+NUMBER_NINETY_SIX);
         }
         else {
-            return String.fromCharCode(carry+96)+String.fromCharCode(number%26+96);
+            return String.fromCharCode(carry+NUMBER_NINETY_SIX)+String.fromCharCode(number%NUMBER_TWENTY_SIX+NUMBER_NINETY_SIX);
         }
     }else {
-        if(number%26 === 0) {
-            return String.fromCharCode(26+96);
+        if(number%NUMBER_TWENTY_SIX === 0) {
+            return String.fromCharCode(NUMBER_TWENTY_SIX+NUMBER_NINETY_SIX);
         }
         else {
-            return String.fromCharCode(number%26+96);
+            return String.fromCharCode(number%NUMBER_TWENTY_SIX+NUMBER_NINETY_SIX);
         }
     }
+}
+
+myLodash.prototype.concat = function(array){
+    var resultArray = [];
+
+    this.each(function(n){
+        resultArray.push(n);
+    });
+
+    myLodash(array).each(function(n){
+        resultArray.push(n);
+    });
+    this.collection = resultArray;
+
+    return this;
+}
+
+myLodash.prototype.deWeight = function(){
+    var temp = {};
+    var array = [];
+
+    this.each(function(n){
+        temp[n+" "] = temp[n+" "] || 0;
+    });
+
+    for(var key in temp) {
+        array.push(parseInt(key));
+    }
+    this.collection = array;
+
+    return this;
 }
 
 myLodash.prototype.value = function(){
