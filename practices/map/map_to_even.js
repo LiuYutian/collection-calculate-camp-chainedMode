@@ -1,7 +1,7 @@
 'use strict';
-function map_to_even(collection){
-    var _ = require('../../myLodash.js');
 
+var _ = require('../../myLodash.js');
+function map_to_even(collection){
     return _(collection).map(function(n){
         return n * 2;
     }).value();
