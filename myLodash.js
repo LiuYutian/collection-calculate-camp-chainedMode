@@ -6,11 +6,18 @@ function myLodash(collection) {
     this.collection = collection;
 }
 
-myLodash.prototype.each = function(fun){
-    for(var i = 0; i < this.collection.length; i++) {
-        fun(this.collection[i], i);
+function each(collection, fun){
+    for(var i = 0; i < collection.length; i++) {
+        fun(collection[i], i);
     }
 }
+
+myLodash.prototype.each = function(fun){
+    each(this.collection, fun);
+};
+
+myLodash.each = each;
+
 
 myLodash.prototype.map = function(fun) {
     var array = [];
@@ -111,25 +118,9 @@ myLodash.prototype.intersection = function(collection_a){
 }
 
 myLodash.prototype.getChar = function(number){
-    var NUMBER_TWENTY_SIX = 26;
-    var NUMBER_NINETY_SIX = 96;
-
-    if(number>NUMBER_TWENTY_SIX) {
-        var carry = parseInt(number/NUMBER_TWENTY_SIX);
-        if(number%NUMBER_TWENTY_SIX === 0) {
-            return String.fromCharCode(carry-1+NUMBER_NINETY_SIX)+String.fromCharCode(NUMBER_TWENTY_SIX+NUMBER_NINETY_SIX);
-        }
-        else {
-            return String.fromCharCode(carry+NUMBER_NINETY_SIX)+String.fromCharCode(number%NUMBER_TWENTY_SIX+NUMBER_NINETY_SIX);
-        }
-    }else {
-        if(number%NUMBER_TWENTY_SIX === 0) {
-            return String.fromCharCode(NUMBER_TWENTY_SIX+NUMBER_NINETY_SIX);
-        }
-        else {
-            return String.fromCharCode(number%NUMBER_TWENTY_SIX+NUMBER_NINETY_SIX);
-        }
-    }
+    var unit = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i','j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+    var elses = ['', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i','j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+    return result = elses[parseInt((number-1) / 26)] + unit[(number-1) % 26];
 }
 
 myLodash.prototype.concat = function(array){
@@ -161,6 +152,49 @@ myLodash.prototype.deWeight = function(){
     this.collection = array;
 
     return this;
+}
+
+myLodash.prototype.exist = function(value) {
+    var bool = false;
+
+    this.each(function(n){
+        if(n === value) {
+            bool = true;
+        }
+    });
+
+    return bool;
+}
+
+myLodash.prototype.sort = function(fun){
+    var array = [];
+    this.each(function(n){
+        array.push(n);
+    });
+
+    myLodash.each(array, function(n1, i1){
+        myLodash.each(array, function(n2, i2){
+            if(fun(array[i1], array[i2])) {
+                var temp = array[i1];
+                array[i1] = array[i2];
+                array[i2] = temp;
+            }
+        });
+    });
+
+    return array;
+}
+
+myLodash.prototype.median = function(){
+    this.collection = myLodash(this.collection).sort(function(a, b){
+        return a > b;
+    });
+
+    if(this.collection.length % 2 === 0) {
+        return (this.collection[this.collection.length/2-1]+this.collection[this.collection.length/2])/2;
+    }else{
+        return this.collection[parseInt(this.collection.length/2)];
+    }
 }
 
 myLodash.prototype.value = function(){
