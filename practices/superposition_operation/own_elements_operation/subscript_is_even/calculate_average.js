@@ -3,17 +3,12 @@
 var _ = require('../../../../myLodash.js');
 
 var calculate_average = function(collection){
-    var array = _.filter(collection, function(n, i){
+    var conut = 0;
+    return _(collection).filter(function(n, i){
         return i % 2 !== 0;
-    });
-
-    var sum = 0;
-
-    _.each(array, function(n){
-        sum += n;
-    });
-
-
-    return sum / array.length;
+    }).reduce(function(a, b){
+        conut++;
+        return a + b;
+    }).value()/++conut;
 };
 module.exports = calculate_average;
