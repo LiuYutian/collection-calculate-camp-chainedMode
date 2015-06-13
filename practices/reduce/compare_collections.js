@@ -9,7 +9,7 @@ function compare_collections(collection_a, collection_b) {
         return false;
     }
 
-    _.each(collection_a, function(n, i){
+    _(collection_a).each(function(n, i){
         if(n != collection_b[i]){
             result = false;
         }
