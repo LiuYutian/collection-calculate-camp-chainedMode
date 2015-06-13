@@ -1,19 +1,14 @@
 'use strict';
 
+var _ = require('../../../myLodash.js');
 function hybrid_operation_to_uneven(collection) {
-    var _ = require('../../../myLodash.js');
-
-    var filterArray = _.filter(collection, function(n){
+    return _(collection).filter(function(n){
         return n % 2 != 0;
-    });
-
-    var mapArray = _.map(filterArray, function(n){
+    }).map(function(n){
         return n * 3 + 5;
-    });
-
-    return _.reduce(mapArray, function(a, b){
+    }).reduce(function(a, b){
         return a + b;
-    });
+    }).value();
 }
 
 module.exports = hybrid_operation_to_uneven;
