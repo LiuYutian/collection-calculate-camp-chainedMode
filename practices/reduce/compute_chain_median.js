@@ -20,7 +20,7 @@ function compute_chain_median(collection) {
         }
     }
 
-    return _.median(array);
+    return _(array).median();
 
 }
 
