@@ -3,9 +3,9 @@
 var _ = require('../../../../myLodash.js');
 
 var even_group_calculate_average = function(collection){
-    var filterArray = _.filter(collection, function(n, i){
+    var filterArray = _(collection).filter(function(n, i){
         return n % 2 === 0 &&i % 2 != 0;
-    });
+    }).value();
 
     var result = [];
     var temp = {};
@@ -16,9 +16,16 @@ var even_group_calculate_average = function(collection){
     });
 
     for(var key in temp) {
-        result.push(_.sum(temp[key])/temp[key].length);
+        result.push(mean(temp[key]));
     }
 
     return result.length === 0 ? [0] : result;
 };
+
+function mean(array){
+    return _(array).reduce(function(a, b){
+        return a + b;
+    }).value()/array.length;
+}
+
 module.exports = even_group_calculate_average;
