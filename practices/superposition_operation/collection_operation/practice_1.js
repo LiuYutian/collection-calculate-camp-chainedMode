@@ -1,15 +1,12 @@
 'use strict';
 
+var _ = require('../../../myLodash.js');
 function hybrid_operation(collection) {
-    var _ = require('../../../myLodash.js');
-
-    var array = _.map(collection, function(n){
+    return _(collection).map(function(n){
         return n*3+2;
-    });
-
-    return _.reduce(array, function(a,b){
+    }).reduce(function(a,b){
         return a + b;
-    });
+    }).value();
 }
 
 module.exports = hybrid_operation;
