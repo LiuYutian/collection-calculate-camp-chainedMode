@@ -3,9 +3,9 @@
 var _ = require('../../../../myLodash.js');
 
 var single_element = function(collection){
-    var array = _.filter(collection, function(n, i){
+    var array = _(collection).filter(function(n, i){
         return i % 2 != 0;
-    });
+    }).value();
 
     var objectArray = [];
 
@@ -27,7 +27,7 @@ var single_element = function(collection){
 
     var resultArray = [];
 
-    _.each(objectArray, function(n, i){
+    _(objectArray).each(function(n, i){
         if(n.count === 1){
             resultArray.push(n.num)
         }
